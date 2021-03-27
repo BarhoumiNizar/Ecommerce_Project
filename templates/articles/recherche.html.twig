@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche!{% endblock %}
+
+{% block body %}
+
+<h1>Recherche</h1>
+<form method="post">
+ <input type="search" name="categorie" placeholder="Saisir categorie "><br>
+ <input type="submit" name="ok" value="Recherche">
+</form>
+
+{% if cat !=null %}
+<h1>Autre Affichage de length : {{res|length}}</h1>
+Il y'a {{nbArticle}} Articles ont le categorie <b><u>{{cat}}</u></b><br>
+{% endif %}
+{% for r in res %}
+ {{r.description}}  {{r.prix}} {{r.date|date('Y-m-d')}}<br>
+
+{% endfor %}
+
+{% endblock %}

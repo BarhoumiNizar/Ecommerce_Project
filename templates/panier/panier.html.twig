@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Article</th>
+      <th scope="col">Description</th>
+      <th scope="col">Prix</th>
+      <th scope="col">Qté demandé</th>
+      <th scope="col">Prix Total</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  {% set total=0 %}
+{% for p in panier %}
+<tr>
+<td>{{p.articles.nom}}</td>
+<td>{{p.articles.description}}</td>
+<td>{{p.articles.prix}}</td>
+<td>{{p.qte}}</td>
+<td>{{ p.qte * p.articles.prix }}</td>
+{% set total=total+ p.qte * p.articles.prix %}
+</tr>
+{% endfor %}
+<tr><td colspan=3>Totals</td><td></td><td>{{total}}</td></tr>
+
+
+  </tbody>
+
+
+
+
+{% endblock %}

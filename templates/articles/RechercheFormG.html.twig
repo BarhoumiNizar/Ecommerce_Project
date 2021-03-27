@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{{ form_start(frm.categorie) }}
+{{form_label(frm.categorie)}}
+{{ form_widget(frm.categorie) }}
+<input type="submit" value="Recherche" name="valider" >
+{{ form_end(frm.categorie) }}
+
+
+
+
+
+{% endblock %}

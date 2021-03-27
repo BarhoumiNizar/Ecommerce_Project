@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<H1>Liste Articles</h1>
+{# for cle in res === foreach($res as $cle) in PDO#}
+{% set role=app.session.get('Role') %}{# set role c'est pour déclarer une variable role en twig #}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Prix</th>
+      <th scope="col">Description</th>
+       <th scope="col">Date</th>
+       <th scope="col" colspan="2">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for cle in res %}
+  {# Modal#}
+
+
+<div class="modal fade" id="exampleModal{{cle.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="post" action="{{path('Addpanier')}}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Commande:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Quantité</label>
+            <input type="number" value="1" min="1" name="qte" class="form-control" id="recipient-name">
+            <input type="hidden" value="{{cle.id}}" name="article">
+          </div>
+     </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button type="submit" class="btn btn-primary">Commander</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+  {# EndModal #}
+    <tr>
+      <th scope="row"> {{cle.id}}</th>
+      <td> {{cle.nom}}</td>
+       <td> {{cle.prix}}</td>
+      <td> {{cle.description}}</td>
+      <td> {{cle.date | date('Y-m-d')}}</td>
+      {% if role=='admin' %}
+      <td><a href="{{path('deleteArticle',{'id':cle.id})}}" class="btn btn-danger">Delete</a></td>
+      <td><a href="{{path('UpdateArticle',{'id':cle.id})}}" class="btn btn-success">Modifier</a></td>
+     {% else %}
+           <td>
+           <a href="#" class="btn btn-success" data-toggle="modal" data-target="#exampleModal{{cle.id}}">Commander</a></td>
+      {% endif %}     
+
+
+    </tr>
+    {% endfor %}
+    
+  </tbody>
+</table>
+
+  
+{% endblock %}

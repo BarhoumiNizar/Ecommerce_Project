@@ -1,0 +1,17 @@
+ {% extends "base.html.twig" %} 
+ {% block body %}
+<div style="width:50%;margin:auto">
+
+{{ form_start(frm)}}
+{{form_label(frm.login)}}
+{{form_widget(frm.login)}}
+{{form_label(frm.mdp)}}
+{{form_widget(frm.mdp)}}
+{#<div style="display:none">
+{{form_rest(frm)}}
+</div>#}
+<input type="submit" value="Connexion" name="connexion" class="btn btn-primary" style="float:right;position:relative;top:20px">
+{{form_end(frm,{'render_rest':false})}}
+</div>
+
+ {% endblock %}
